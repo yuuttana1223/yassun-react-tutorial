@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { getLanguages } from "./const/languages";
 import { Form } from "./Form";
+import { withLoading } from "./hoc/withLoading";
 import { List } from "./List";
 
 const SHeader = styled.header`
@@ -23,9 +25,9 @@ const SHeaderLi = styled.li`
   border-bottom: ${(props) => (props.focused ? "2px solid #f44336" : "none")};
 `;
 
-function App() {
+function App({ data }) {
   const [tab, setTab] = useState("list");
-  const [langs, setLangs] = useState([]);
+  const [langs, setLangs] = useState(data);
 
   const addLang = (lang) => {
     setLangs([...langs, lang]);
@@ -53,4 +55,4 @@ function App() {
   );
 }
 
-export default App;
+export default withLoading(App, getLanguages);
