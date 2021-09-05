@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { SButton } from "./components/button";
 import { FormModal } from "./FormModal";
+import { Hint } from "./Hint";
 
 const SContainer = styled.div`
   padding: 12px;
@@ -47,6 +48,7 @@ export const Form = ({ onAddLang }) => {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
+          <Hint />
         </div>
         <SButtonContainer>
           <SFormButton>追加</SFormButton>
