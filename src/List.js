@@ -1,11 +1,11 @@
 import React from "react";
 
-const LANGUAGES = ["JavaScript", "C++", "Ruby", "Java", "PHP", "Go"];
 export class List extends React.Component {
   render() {
+    const { langs } = this.props;
     return (
       <div>
-        {LANGUAGES.map((lang, index) => (
+        {langs.map((lang, index) => (
           <div key={index}>{lang}</div>
         ))}
       </div>
