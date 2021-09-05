@@ -1,11 +1,21 @@
-import { useState } from "react";
-import { LANGUAGES } from "./const/languages";
+import { useEffect, useState } from "react";
+import { getLanguages } from "./const/languages";
 import { Form } from "./Form";
 import { List } from "./List";
 
 function App() {
   const [tab, setTab] = useState("list");
-  const [langs, setLangs] = useState(LANGUAGES);
+  const [langs, setLangs] = useState([]);
+
+  useEffect(() => {
+    console.log("App.js: useEffect");
+    fetchLaguages();
+  }, []);
+
+  const fetchLaguages = async () => {
+    const languages = await getLanguages();
+    setLangs(languages);
+  };
 
   const addLang = (lang) => {
     setLangs([...langs, lang]);
@@ -21,7 +31,11 @@ function App() {
         </ul>
       </header>
       <hr />
-      {tab === "list" ? <List langs={langs} /> : <Form onAddLang={addLang} />}
+      {tab === "list" ? (
+        <List langs={langs} />
+      ) : (
+        <Form onAddLang={addLang /* (lang) => addLang(lang) */} />
+      )}
     </div>
   );
 }
