@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { SButton } from "./components/button";
+import { FormModal } from "./FormModal";
 
 const SContainer = styled.div`
   padding: 12px;
@@ -29,10 +30,11 @@ const SFormButton = styled(SButton)`
 
 export const Form = ({ onAddLang }) => {
   const [text, setText] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const submitForm = (e) => {
     e.preventDefault();
-    onAddLang(text);
+    setShowModal(true);
   };
   return (
     <SContainer>
@@ -50,6 +52,12 @@ export const Form = ({ onAddLang }) => {
           <SFormButton>追加</SFormButton>
         </SButtonContainer>
       </form>
+      {showModal && (
+        <FormModal
+          confirm={() => onAddLang(text)}
+          cancel={() => setShowModal(false)}
+        ></FormModal>
+      )}
     </SContainer>
   );
 };
