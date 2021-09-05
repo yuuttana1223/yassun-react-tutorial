@@ -1,9 +1,11 @@
-export const List = ({ title }) => {
-  // const title = props.title;
+const LANGUAGES = ["JavaScript", "C++", "Ruby", "java", "PHP", "Go"];
+
+export const List = () => {
   return (
     <div>
-      <h4>{title}</h4>
-      <div>リストです</div>
+      {LANGUAGES.map((lang, index) => (
+        <div key={index}>{lang}</div>
+      ))}
     </div>
   );
 };
