@@ -1,9 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-const SContainer = styled.div`
-  padding: 12px 64px;
-`;
+import { TabBodyContainer } from "./components/tab-body-container";
 
 const SListItem = styled.div`
   padding: 8px 16px;
@@ -18,11 +15,11 @@ export class List extends React.Component {
   render() {
     const { langs } = this.props;
     return (
-      <SContainer>
+      <TabBodyContainer title="取り扱い言語リスト">
         {langs.map((lang, index) => (
           <SListItem key={index}>{lang}</SListItem>
         ))}
-      </SContainer>
+      </TabBodyContainer>
     );
   }
 }

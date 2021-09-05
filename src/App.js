@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { getLanguages } from "./const/languages";
 import { Form } from "./Form";
+import { withLoading } from "./hoc/withLoading";
 import { List } from "./List";
 
 const SHeader = styled.header`
@@ -26,7 +28,7 @@ const SHeaderLi = styled.li`
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tab: "list", langs: [] };
+    this.state = { tab: "list", langs: props.data };
   }
 
   addLang(lang) {
@@ -64,4 +66,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withLoading(App, getLanguages);
