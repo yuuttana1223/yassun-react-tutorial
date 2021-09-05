@@ -1,6 +1,11 @@
 import React from "react";
 
 export class List extends React.Component {
+  // 終了時
+  componentWillUnmount() {
+    console.log("List.js: componentWillUnmount");
+  }
+
   render() {
     const { langs } = this.props;
     return (
