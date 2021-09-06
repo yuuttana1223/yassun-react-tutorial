@@ -1,31 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { getLanguages } from "./const/languages";
+import { ThemeContext } from "./contexts/ThemeContext";
 import { Form } from "./Form";
-import { withLoading } from "./hoc/withLoading";
+import { Header } from "./Header";
 import { List } from "./List";
 
-const SHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
-  padding: 24px 64px 0;
-  border-bottom: 1px solid #e0e0e0;
-`;
-
-const SHeaderUl = styled.ul`
-  display: flex;
-  margin: 0;
-  padding: 0;
-`;
-
-const SHeaderLi = styled.li`
-  list-style: none;
-  padding: 4px 12px;
-  cursor: pointer;
-  border-bottom: ${(props) => (props.focused ? "2px solid #f44336" : "none")};
+const SContainer = styled.div`
+  height: 100%;
+  color: ${({ theme }) => theme.color};
+  background-color: ${({ theme }) => theme.backgroundColor}; ;
 `;
 
 class App extends React.Component {
+  static contextType = ThemeContext;
   constructor(props) {
     super(props);
     this.state = { tab: "list", langs: props.data };
@@ -38,32 +25,18 @@ class App extends React.Component {
 
   render() {
     const { tab, langs } = this.state;
+    const [theme] = this.context;
     return (
-      <div>
-        <SHeader>
-          <SHeaderUl>
-            <SHeaderLi
-              focused={tab === "list"}
-              onClick={() => this.setState({ tab: "list" })}
-            >
-              リスト
-            </SHeaderLi>
-            <SHeaderLi
-              focused={tab === "form"}
-              onClick={() => this.setState({ tab: "form" })}
-            >
-              フォーム
-            </SHeaderLi>
-          </SHeaderUl>
-        </SHeader>
+      <SContainer theme={theme}>
+        <Header tab={tab} setTab={(t) => this.setState({ tab: t })} />
         {tab === "list" ? (
           <List langs={langs} />
         ) : (
           <Form onAddLang={(lang) => this.addLang(lang)} />
         )}
-      </div>
+      </SContainer>
     );
   }
 }
 
-export default withLoading(App, getLanguages);
+export default App;
